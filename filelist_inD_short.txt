@@ -1,1 +1,1 @@
-./data/inD_test_20.pkl
+./data/inD_test_4.pkl
