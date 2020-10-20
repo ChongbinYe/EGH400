@@ -2,9 +2,9 @@
 import numpy as np
 import scipy.io as sio
 from prepare_data import create_dataset_with_all_neighbours_and_t
-from move_pedestrian_tracks_to_centre import My_GridWorld
+#from move_pedestrian_tracks_to_centre import My_GridWorld
 from sklearn.preprocessing import scale
-from rotate_trajectory import Rotate2D
+#from rotate_trajectory import Rotate2D
 import scipy
 #d=sio.loadmat('../filtered_spline_data.mat') #---USE THIS FOR EIF DATA----#
 #d=sio.loadmat('../filtered_GC_data.mat')      #---USE THIS FOR GC DATA----#
@@ -42,7 +42,7 @@ secondary_neighbours=0
 hidden_dim=400
 
 print('finding the neighbours and concatenating them to numpy matrix')
-(selected_x_all,selected_y_all,front_x_all,front_y_all,left_x_all,left_y_all,right_x_all,right_y_all,weights_front_all,weights_left_all,weights_right_all,time_all) = create_dataset_with_all_neighbours_and_t(main_mode_data, secondary_mode, neighbours, secondary_neighbours, secondary_neighbours)
+(selected_x_all,selected_y_all,front_x_all,front_y_all,left_x_all,left_y_all,right_x_all,right_y_all,weights_front_all,weights_left_all,weights_right_all,time_all) = create_dataset_with_all_neighbours_and_t(main_mode_data, neighbours, secondary_neighbours)
 # 
 for i in range(len(selected_x_all)):
     track_x=selected_x_all[i]
@@ -171,24 +171,24 @@ for i in range(len(selected_x_all)):
         all_l_w= np.concatenate((all_l_w,l_w_all), axis=0)
         all_r_w= np.concatenate((all_r_w,r_w_all), axis=0)
      
-     print('--------- all shapes --------')
-     print(all_track_x.shape)
-     print(all_track_y.shape)
-     print(all_l_x.shape)
+    print('--------- all shapes --------')
+    print(all_track_x.shape)
+    print(all_track_y.shape)
+    print(all_l_x.shape)
     print(all_l_y.shape)
-     print(all_r_x.shape)
-     print(all_f_y.shape)
+    print(all_r_x.shape)
+    print(all_f_y.shape)
      
-     print(all_f_w.shape)
-     print(all_l_w.shape)
-     print(all_r_w.shape)
+    print(all_f_w.shape)
+    print(all_l_w.shape)
+    print(all_r_w.shape)
      
- sio.savemat('temp_xx.mat',
+sio.savemat('temp_xx.mat',
              {'selected_x_all':all_track_x,'selected_y_all':all_track_y,'front_x_all':all_f_x,
               'front_y_all':all_f_y,'left_x_all':all_l_x,'left_y_all':all_l_y,'right_x_all':all_r_x,
               'right_y_all':all_f_y,'all_f_w':all_f_w,'all_l_w':all_l_w,
               'all_r_w':all_r_w})
-
+'''
 d=sio.loadmat('temp_xx.mat')
 all_track_x=d['selected_x_all']
 total_track_len=all_track_x.shape[1]
@@ -303,3 +303,4 @@ sio.savemat(save_file_name,
              'front_y_all':front_y_all,'left_x_all':left_x_all,'left_y_all':left_y_all,'right_x_all':right_x_all,
              'right_y_all':right_y_all,'all_f_w':front_w_all,'all_l_w':left_w_all,
              'all_r_w':right_w_all})
+             '''
