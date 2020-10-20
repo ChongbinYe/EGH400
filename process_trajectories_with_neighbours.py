@@ -159,7 +159,7 @@ for i in range(len(selected_x_all)):
         all_l_w= l_w_all
         all_r_w= r_w_all
         
-     else:
+    else:
         all_f_x= np.concatenate((all_f_x,f_x_all), axis=0)
         all_f_y= np.concatenate((all_f_y,f_y_all), axis=0)
         all_l_x= np.concatenate((all_l_x,l_x_all), axis=0)
