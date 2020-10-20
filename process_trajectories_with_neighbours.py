@@ -6,6 +6,7 @@ from prepare_data import create_dataset_with_all_neighbours_and_t
 from sklearn.preprocessing import scale
 #from rotate_trajectory import Rotate2D
 import scipy
+import pickle
 #d=sio.loadmat('../filtered_spline_data.mat') #---USE THIS FOR EIF DATA----#
 #d=sio.loadmat('../filtered_GC_data.mat')      #---USE THIS FOR GC DATA----#
 # dataset_name='deathCircle'
@@ -19,7 +20,9 @@ path='./InD_data/'
 #file_name=path+'filtered_%s_data.mat'%dataset_name
 save_file_name=path+'%s_raw_tracks-with_neighbours'%dataset_name
 #d=sio.loadmat(file_name)     #---USE THIS FOR stanford DATA----#
-data = open("inD_test.pkl","rb")
+d = open("inD_test.pkl","rb")
+data = pickle.load(d)
+data=np.array(data)
 clustering_x=data[:,:,0]
 clustering_y=data[:,:,1]
 clustering_t=data[:,:,2]
