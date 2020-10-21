@@ -19,10 +19,10 @@ dataset_name='InD'
 path='./InD_data/'
 #file_name=path+'filtered_%s_data.mat'%dataset_name
 save_file_name=path+'%s_raw_tracks-with_neighbours'%dataset_name
+'''
 #d=sio.loadmat(file_name)     #---USE THIS FOR stanford DATA----#
 d = open("inD_test.pkl","rb")
 data = pickle.load(d)
-data=np.array(data)
 clustering_x=data[:,:,0]
 clustering_y=data[:,:,1]
 clustering_t=data[:,:,2]
@@ -43,10 +43,28 @@ neighbours=10
 total_track_len=clustering_x.shape[1]
 secondary_neighbours=0
 hidden_dim=400
+'''
+hidden_dim=40
+total_track_len = 10
+
+with open("./data/inD_test_10.pkl") as f:
+    primary_data = f.readlines()
+primary_data = [x.strip() for x in primary_data]
 
 print('finding the neighbours and concatenating them to numpy matrix')
-(selected_x_all,selected_y_all,front_x_all,front_y_all,left_x_all,left_y_all,right_x_all,right_y_all,weights_front_all,weights_left_all,weights_right_all,time_all) = create_dataset_with_all_neighbours_and_t(main_mode_data, neighbours, secondary_neighbours)
-# 
+'(selected_x_all,selected_y_all,front_x_all,front_y_all,left_x_all,left_y_all,right_x_all,right_y_all,weights_front_all,weights_left_all,weights_right_all,time_all) = create_dataset_with_all_neighbours_and_t(main_mode_data, neighbours, secondary_neighbours)'
+selected_x_all=primary_data['selected_x']
+selected_y_all=primary_data['selected_y']
+front_x_all=primary_data['front_x']
+front_y_all=primary_data['front_y']
+left_x_all=primary_data['left_x']
+left_y_all=primary_data['left_y']
+right_x_all=primary_data['right_x']
+right_y_all=primary_data['right_y']
+weights_front_all=primary_data['front_w']
+weights_left_all=primary_data['left_w']
+weights_right_all=primary_data['right_w']
+time_all=primary_data['time']
 for i in range(len(selected_x_all)):
     track_x=selected_x_all[i]
     track_y=selected_y_all[i]
