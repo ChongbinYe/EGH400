@@ -47,9 +47,10 @@ hidden_dim=400
 hidden_dim=40
 total_track_len = 10
 
-with open("./data/inD_test_10.pkl") as f:
-    primary_data = f.readlines()
-primary_data = [x.strip() for x in primary_data]
+load_file = open("./data/inD_test_10.pkl","rb")
+load_data = pickle.load(load_file)
+print(np.array(load_data).shape)
+primary_data = np.array(load_data)
 
 print('finding the neighbours and concatenating them to numpy matrix')
 '(selected_x_all,selected_y_all,front_x_all,front_y_all,left_x_all,left_y_all,right_x_all,right_y_all,weights_front_all,weights_left_all,weights_right_all,time_all) = create_dataset_with_all_neighbours_and_t(main_mode_data, neighbours, secondary_neighbours)'
