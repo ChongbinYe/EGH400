@@ -66,6 +66,7 @@ weights_front_all=primary_data['front_w']
 weights_left_all=primary_data['left_w']
 weights_right_all=primary_data['right_w']
 time_all=primary_data['time']
+print(len(selected_x_all))
 for i in range(len(selected_x_all)):
     track_x=selected_x_all[i]
     track_y=selected_y_all[i]
