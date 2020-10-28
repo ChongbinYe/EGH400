@@ -433,7 +433,7 @@ def main():
 		r_y=right_neighbours[i,:,:,1]
 		f_x=front_neighbours[i,:,:,0]
 		f_y=front_neighbours[i,:,:,1]
-		
+
 		neighbour_x=numpy.concatenate((l_x,r_x,f_x),axis=0)
 		neighbour_y=numpy.concatenate((l_y,r_y,f_y),axis=0)
 		print(l_x.shape)
@@ -442,7 +442,7 @@ def main():
 		print(f_x)
 		print(neighbour_x.shape)
 		
-		file_name='NGSIM_plots_for_features/example_track_%d.png'%i
+		file_name='data/example_track_%d.png'%i
 		plot_results_with_neighbours(x_first_part,y_first_part,x_second_part,y_second_part,x_pred,y_pred,neighbour_x,neighbour_y,[],[-10, 100],[-10 ,100],save_file_name=file_name)
 		img = cv2.imread(file_name)
 		img = cv2.bitwise_not(img)
