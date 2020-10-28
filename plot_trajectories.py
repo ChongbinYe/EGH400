@@ -129,10 +129,8 @@ def plot_results_with_neighbours(x_first_part,y_first_part,x_second_part,y_secon
     for i in range(neighbour_x.shape[0]):
         for j in range(neighbour_x.shape[1]):
             #circ=plt.Circle((neighbour_x[i,j], neighbour_y[i,j]), weights[i,j]+.02, color='purple')
-            print(neighbour_x[i,j])
-            print(neighbour_y[i,j])
-            print(weights[i,j])
-            circ=plt.Circle((neighbour_x[i,j], neighbour_y[i,j]),6, alpha=weights[i,j], color='purple')
+            ', alpha=weights[i,j]'
+            circ=plt.Circle((neighbour_x[i,j], neighbour_y[i,j]),6, color='purple')
             axes.add_patch(circ)
     
     if save_file_name is not None:
