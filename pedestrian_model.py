@@ -31,6 +31,8 @@ from keras.layers.core import Dense, Reshape
 from keras.callbacks import ModelCheckpoint
 from keras import backend as K
 from sklearn.metrics import mean_squared_error
+from plot_trajectories import plot_results_with_neighbours
+import cv2
 
 # removed due to lack of support for recent toolkits
 #from seq2seq.models import AttentionSeq2Seq
@@ -377,7 +379,68 @@ def main():
 	# get error metrics and print to screen
 	print('Average Displacement Error: ' + str(average_displacement_error(predicted, target_test['output_trajectory'])))
 	print('Final Displacement Error:   ' + str(final_displacement_error(predicted, target_test['output_trajectory'])))
+
+	print('IRL feature extraction....')
+	save_path='./data'
+	input_train, target_train, input_test, target_test = load_data(results.data, results.input_length, results.hidden_dim, 0.95)
+	traj_obs=input_train['pedestrian_of_interest']
+	
+	traj_future=target_train['output_trajectory']
+	
+	
+	left_neighbours=input_train['left_neighbours']
+	right_neighbours=input_train['right_neighbours']
+	front_neighbours=input_train['front_neighbours']
+	
+	
+	#no_of_trajectories=intermediate_output.shape[0]
+	
+	no_of_trajectories=traj_obs.shape[0]
+	
+	#---- normalising the data-----
+	# for i in range(intermediate_output.shape[1]):
+	# 	intermediate_output[:,i,:]=normalize(intermediate_output[:,i,:], axis=1, norm='l2')
+	# 
+	
+	for i in range(no_of_trajectories):
+		print('===> saving  ' +str(i) +'/'+str(no_of_trajectories))
+		traj_obs_new=traj_obs[i]
+		traj_future_new=traj_future[i]
+		print(traj_obs_new.shape)
+		print(traj_future_new.shape)
+		traj_new=numpy.concatenate((traj_obs_new,traj_future_new),axis=0)
+		print(traj_new.shape)
+		#feat=numpy.reshape(intermediate_output[i,:,:],(intermediate_output.shape[1], 20,20))
+	       
+		#----------- plot the traj of PI and neighbours for the baseline models input-----
+		x_first_part=traj_obs[i,:,0]
+		y_first_part=traj_obs[i,:,1]
+		x_second_part=traj_future[i,:,0]
+		y_second_part=traj_future[i,:,1]
+		x_pred=x_second_part
+		y_pred=y_second_part
+	       
+		l_x=numpy.expand_dims(left_neighbours[i,:,:,0],axis=0)
+		l_y=numpy.expand_dims(left_neighbours[i,:,:,1],axis=0)
+		r_x=numpy.expand_dims(right_neighbours[i,:,:,0],axis=0)
+		r_y=numpy.expand_dims(right_neighbours[i,:,:,1],axis=0)
+		f_x=numpy.expand_dims(front_neighbours[i,:,:,0],axis=0)
+		f_y=numpy.expand_dims(front_neighbours[i,:,:,1],axis=0)
+		neighbour_x=numpy.concatenate((l_x,r_x,f_x),axis=0)
+		neighbour_y=numpy.concatenate((l_y,r_y,f_y),axis=0)
 		
+		print(neighbour_x.shape)
+		
+		file_name='NGSIM_plots_for_features/example_track_%d.png'%i
+		plot_results_with_neighbours(x_first_part,y_first_part,x_second_part,y_second_part,x_pred,y_pred,neighbour_x,neighbour_y,[],[-10, 100],[-10 ,100],save_file_name=file_name)
+		img = cv2.imread(file_name)
+		img = cv2.bitwise_not(img)
+		cv2.imwrite(file_name, img)
+		resized_image = cv2.resize(img, (80, 80))
+		resized_image=numpy.swapaxes(resized_image,0,2)
+		
+		#sio.savemat(save_path+'/example_track_'+str(i)+'.mat',{'traj':traj_new,'feat':feat, 'baseline_feat':resized_image})
+		sio.savemat(save_path+'/example_track_'+str(i)+'.mat',{'traj':traj_new, 'baseline_feat':resized_image})
 	
 if __name__ == '__main__':
 	main()
