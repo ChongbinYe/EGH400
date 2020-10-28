@@ -104,12 +104,12 @@ def plot_results_with_neighbours(x_first_part,y_first_part,x_second_part,y_secon
     plt.scatter(x_second_part[-1],y_second_part[-1],s=10,color='red')
     plt.plot(x_pred,y_pred,color='green',linewidth=2.5)
     plt.scatter(x_pred[-1],y_pred[-1],s=10,color='green')
-    '''
+    
     # Find where the -50 (dummy point) values are and fill them with NaNs
     rows,cols=np.where(neighbour_x == dummy_value)
     neighbour_x[rows,cols]=np.nan
     neighbour_y[rows,cols]=np.nan
-    '''
+    
     plt.plot(neighbour_x,neighbour_y,color='purple')
     plt.scatter(neighbour_x[-1,:],neighbour_y[-1,:],s=8,color='purple')
     
@@ -123,7 +123,9 @@ def plot_results_with_neighbours(x_first_part,y_first_part,x_second_part,y_secon
     # (line1_xs, line1_ys) = zip(*line1)
     # axes.add_line(mlines.Line2D(line1_xs, line1_ys, linewidth=2, ))
     
-    
+    neighbour_x=np.array(neighbour_x)
+    neighbour_y=np.array(neighbour_y)
+
     axes.set_xlim(xlim)
     axes.set_ylim(ylim)
     
