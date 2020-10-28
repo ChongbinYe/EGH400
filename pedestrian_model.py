@@ -419,13 +419,14 @@ def main():
 		y_second_part=traj_future[i,:,1]
 		x_pred=x_second_part
 		y_pred=y_second_part
-	       
+	    '''   
 		l_x=numpy.expand_dims(left_neighbours[i,:,:,0],axis=0)
 		l_y=numpy.expand_dims(left_neighbours[i,:,:,1],axis=0)
 		r_x=numpy.expand_dims(right_neighbours[i,:,:,0],axis=0)
 		r_y=numpy.expand_dims(right_neighbours[i,:,:,1],axis=0)
 		f_x=numpy.expand_dims(front_neighbours[i,:,:,0],axis=0)
 		f_y=numpy.expand_dims(front_neighbours[i,:,:,1],axis=0)
+		'''
 		neighbour_x=numpy.concatenate((l_x,r_x,f_x),axis=0)
 		neighbour_y=numpy.concatenate((l_y,r_y,f_y),axis=0)
 		print(l_x.shape)
