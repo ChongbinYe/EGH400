@@ -122,9 +122,6 @@ def plot_results_with_neighbours(x_first_part,y_first_part,x_second_part,y_secon
     # line1 = [(x_first_part[0],y_first_part[0]), (x_first_part[-1],y_first_part[-1])]
     # (line1_xs, line1_ys) = zip(*line1)
     # axes.add_line(mlines.Line2D(line1_xs, line1_ys, linewidth=2, ))
-    
-    neighbour_x=np.array(neighbour_x)
-    neighbour_y=np.array(neighbour_y)
 
     axes.set_xlim(xlim)
     axes.set_ylim(ylim)
@@ -132,6 +129,9 @@ def plot_results_with_neighbours(x_first_part,y_first_part,x_second_part,y_secon
     for i in range(neighbour_x.shape[0]):
         for j in range(neighbour_x.shape[1]):
             #circ=plt.Circle((neighbour_x[i,j], neighbour_y[i,j]), weights[i,j]+.02, color='purple')
+            print(neighbour_x[i,j])
+            print(neighbour_y[i,j])
+            print(weights[i,j])
             circ=plt.Circle((neighbour_x[i,j], neighbour_y[i,j]),6, alpha=weights[i,j], color='purple')
             axes.add_patch(circ)
     
