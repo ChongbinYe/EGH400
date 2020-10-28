@@ -428,7 +428,10 @@ def main():
 		f_y=numpy.expand_dims(front_neighbours[i,:,:,1],axis=0)
 		neighbour_x=numpy.concatenate((l_x,r_x,f_x),axis=0)
 		neighbour_y=numpy.concatenate((l_y,r_y,f_y),axis=0)
-		
+		print(l_x.shape)
+		print(r_x.shape)
+		print(f_x.shape)
+		print(f_x)
 		print(neighbour_x.shape)
 		
 		file_name='NGSIM_plots_for_features/example_track_%d.png'%i
