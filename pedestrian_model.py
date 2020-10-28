@@ -427,6 +427,13 @@ def main():
 		f_x=numpy.expand_dims(front_neighbours[i,:,:,0],axis=0)
 		f_y=numpy.expand_dims(front_neighbours[i,:,:,1],axis=0)
 		'''
+		l_x=left_neighbours[i,:,:,0]
+		l_y=left_neighbours[i,:,:,1]
+		r_x=right_neighbours[i,:,:,0]
+		r_y=right_neighbours[i,:,:,1]
+		f_x=front_neighbours[i,:,:,0]
+		f_y=front_neighbours[i,:,:,1]
+		
 		neighbour_x=numpy.concatenate((l_x,r_x,f_x),axis=0)
 		neighbour_y=numpy.concatenate((l_y,r_y,f_y),axis=0)
 		print(l_x.shape)
