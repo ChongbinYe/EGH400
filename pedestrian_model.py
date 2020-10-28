@@ -326,7 +326,7 @@ def main():
 	checkpoint_filepath = results.output + ".hdf5"
 	checkpoint = ModelCheckpoint(checkpoint_filepath, monitor='val_loss', verbose=0, save_best_only=True, mode='auto', period=1)
 	callbacks_list = [checkpoint]
-
+	'''
 	# train the model
 	model.fit(input_train, target_train, batch_size=results.batch_size, epochs=results.epochs, callbacks=callbacks_list, validation_split=results.val_split, shuffle=True)
     
@@ -379,7 +379,7 @@ def main():
 	# get error metrics and print to screen
 	print('Average Displacement Error: ' + str(average_displacement_error(predicted, target_test['output_trajectory'])))
 	print('Final Displacement Error:   ' + str(final_displacement_error(predicted, target_test['output_trajectory'])))
-
+	'''
 	print('IRL feature extraction....')
 	save_path='./data'
 	input_train, target_train, input_test, target_test = load_data(results.data, results.input_length, results.hidden_dim, 0.95)

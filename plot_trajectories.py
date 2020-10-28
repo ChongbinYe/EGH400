@@ -35,12 +35,12 @@ def plot_trajectory_with_neighbours(x_first_part,y_first_part,x_second_part,y_se
     plt.scatter(x_first_part[-1],y_first_part[-1],s=3,color='blue')
     plt.plot(x_second_part,y_second_part,color='red')
     plt.scatter(x_second_part[-1],y_second_part[-1],s=3,color='red')
-    
+    '''
     # Find where the -50 (dummy point) values are and fill them with NaNs
     rows,cols=np.where(neighbour_x == dummy_value)
     neighbour_x[rows,cols]=np.nan
     neighbour_y[rows,cols]=np.nan
-    
+    '''
     plt.plot(neighbour_x,neighbour_y,color='purple')
     plt.scatter(neighbour_x[-1,:],neighbour_y[-1,:],s=8,color='purple')
     
