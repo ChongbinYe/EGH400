@@ -326,7 +326,7 @@ def main():
 	checkpoint_filepath = results.output + ".hdf5"
 	checkpoint = ModelCheckpoint(checkpoint_filepath, monitor='val_loss', verbose=0, save_best_only=True, mode='auto', period=1)
 	callbacks_list = [checkpoint]
-	'''
+	
 	# train the model
 	model.fit(input_train, target_train, batch_size=results.batch_size, epochs=results.epochs, callbacks=callbacks_list, validation_split=results.val_split, shuffle=True)
     
@@ -419,14 +419,14 @@ def main():
 		y_second_part=traj_future[i,:,1]
 		x_pred=x_second_part
 		y_pred=y_second_part
-		'''
+		
 		l_x=numpy.expand_dims(left_neighbours[i,:,:,0],axis=0)
 		l_y=numpy.expand_dims(left_neighbours[i,:,:,1],axis=0)
 		r_x=numpy.expand_dims(right_neighbours[i,:,:,0],axis=0)
 		r_y=numpy.expand_dims(right_neighbours[i,:,:,1],axis=0)
 		f_x=numpy.expand_dims(front_neighbours[i,:,:,0],axis=0)
 		f_y=numpy.expand_dims(front_neighbours[i,:,:,1],axis=0)
-		'''
+		
 		l_x=left_neighbours[i,:,:,0]
 		l_y=left_neighbours[i,:,:,1]
 		r_x=right_neighbours[i,:,:,0]
@@ -436,11 +436,6 @@ def main():
 
 		neighbour_x=numpy.concatenate((l_x,r_x,f_x),axis=0)
 		neighbour_y=numpy.concatenate((l_y,r_y,f_y),axis=0)
-		print(l_x.shape)
-		print(r_x.shape)
-		print(f_x.shape)
-		print(f_x)
-		print(neighbour_x.shape)
 		
 		file_name='data/example_track_%d.png'%i
 		plot_results_with_neighbours(x_first_part,y_first_part,x_second_part,y_second_part,x_pred,y_pred,neighbour_x,neighbour_y,[],[-10, 100],[-10 ,100],save_file_name=file_name)
@@ -452,6 +447,6 @@ def main():
 		
 		#sio.savemat(save_path+'/example_track_'+str(i)+'.mat',{'traj':traj_new,'feat':feat, 'baseline_feat':resized_image})
 		sio.savemat(save_path+'/example_track_'+str(i)+'.mat',{'traj':traj_new, 'baseline_feat':resized_image})
-	
+	'''
 if __name__ == '__main__':
 	main()
